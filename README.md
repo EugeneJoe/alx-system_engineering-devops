@@ -1,4 +1,4 @@
-# Bash shell basics
+# holberton-system_engineering-devops
 
-This project demonstrates the most commonly used command line commands
+This project demonstrates the most commonly used bash shell commands
 for carrying out basic operations.
