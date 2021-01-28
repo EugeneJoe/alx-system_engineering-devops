@@ -109,4 +109,7 @@ directories which should be listed first.
 
 Assume that each file will have at least one digit or one letter.
 
+## 19-holberton.mgc
 
+A magic file to be used with 'file' command to detect Holberton files.
+Holberton files contain the string 'HOLBERTON' at offset 0.
