@@ -2,7 +2,7 @@
 # This script displays the content of the current directory
 
 FILES="$(ls)"
-for i in "$FILES"
+for i in $FILES
 do
 	echo "$i" | cut -d '-' -f 2
 done
