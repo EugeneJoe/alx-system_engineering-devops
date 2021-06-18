@@ -15,5 +15,5 @@ do
 		let "m += 1"
 	done
 	let "h += 1"
-	m=0
+	m=1
 done
