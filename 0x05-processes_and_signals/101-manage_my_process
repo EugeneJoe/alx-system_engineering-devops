@@ -16,11 +16,11 @@ case "$1" in
 	;;
     "stop")
 	sudo rm /var/run/my_process.pid
-	kill $(ps auxf | grep manage_my_process | tail -n 1 | awk '{print $2}')
+	kill "$(pgrep -f manage_my_process | tail -n 1 | awk '{$2}')"
 	echo "manage_my_process stopped"
 	;;
     "restart")
-	kill $(ps auxf | grep manage_my_process | tail -n 1 | awk '{print $2}')
+	kill "$(pgrep -f manage_my_process | tail -n 1 | awk '{$2}')"
 	sudo rm /var/run/my_process.pid
 	bash manage_my_process &
 	pgrep -f manage_my_process | tail -n 1 > my_process.pid
