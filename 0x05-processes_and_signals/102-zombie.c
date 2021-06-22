@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-/** infinite_while - an infinite while loop
+/**
+ * infinite_while - an infinite while loop
  *
  * Return: Always 0
  */
@@ -15,12 +16,12 @@ int infinite_while(void)
 	return (0);
 }
 
-
-/** main - create 5 zombie processes
+/**
+ * main - create 5 zombie processes
  *
  * Return: Always 0
  */
-int main()
+int main(void)
 {
 	pid_t pids[5];
 	int i;
