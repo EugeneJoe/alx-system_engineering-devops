@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Script that creates an RSA key pair.
+# provides a name for the key, a passphrase and sets the number of bits to 4096
+
+ssh-keygen -t rsa -f holberton -N 'betty' -b 4096
