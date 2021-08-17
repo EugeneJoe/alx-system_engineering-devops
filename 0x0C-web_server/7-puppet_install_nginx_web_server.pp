@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Install and configure an Nginx server with the following requirements:
 # Listens on port 80
 # When querying Nginx at its root '/', return a page containing the string 'Holberton School'
