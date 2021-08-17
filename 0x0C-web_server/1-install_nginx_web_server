@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Install nginx, set up to listen to port 80 and change default page served to
+# "Holberton School"
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Holberton School" | sudo tee /var/www/html/index.nginx-debian.html
+sudo service nginx start
