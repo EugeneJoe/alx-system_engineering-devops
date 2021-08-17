@@ -6,20 +6,11 @@
 
 package { 'nginx':
       ensure   => 'installed',
-      name     => 'nginx',
-      provider => 'apt',
-}
-
-exec { 'ufw allow':
-      command => 'sudo ufw allow "Nginx HTTP"',
-      path    => '/usr/bin:/usr/sbin:/bin',
 }
 
 file { '/var/www/html/index.nginx-debian.html':
       ensure  => 'present',
       path    => '/var/www/html/index.nginx-debian.html',
-      mode    => '0644',
-      owner   => 'root',
       content => 'Holberton School',
 }
 
@@ -32,6 +23,5 @@ file_line { 'rewrite redirect':
 
 service { 'nginx':
     ensure  => 'running',
-    name    => 'nginx',
     require => Package['nginx'],
 }
