@@ -19,6 +19,7 @@ package { 'nginx':
 exec { 'ufw allow':
       command => "sudo ufw allow \'Nginx HTTP\'",
       path    => '/usr/bin:/usr/sbin:/bin',
+      require => Package['nginx'],
 }
 
 file { '/var/www/html/index.nginx-debian.html':
@@ -32,9 +33,11 @@ file { '/var/www/html/index.nginx-debian.html':
 
 file_line { 'rewrite redirect':
     ensure  => 'present',
+    after   => 'server_name _;',
     path    => '/etc/nginx/sites-available/default',
-    match   => "^\tserver_name _;",
     line    => "\tserver_name _;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;",
+    notify  => Exec['nginx restart'],
+    require => File['/var/www/html/index.nginx-debian.html'],
 }
 
 exec { 'nginx restart':
