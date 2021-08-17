@@ -4,7 +4,7 @@
 # Perform a permanent redirect when you query Nginx at '/redirect_me'
 
 package { 'nginx':
-      ensure   => 'installed',
+      ensure => installed,
 }
 
 file { '/var/www/html/index.nginx-debian.html':
