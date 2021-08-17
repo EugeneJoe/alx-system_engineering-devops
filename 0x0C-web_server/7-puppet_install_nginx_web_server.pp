@@ -7,9 +7,7 @@ package { 'nginx':
       ensure => installed,
 }
 
-file { '/var/www/html/index.nginx-debian.html':
-      ensure  => 'present',
-      path    => '/var/www/html/index.nginx-debian.html',
+file { '/var/www/html/index.html':
       content => 'Holberton School',
 }
 
