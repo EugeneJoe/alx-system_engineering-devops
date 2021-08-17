@@ -5,8 +5,8 @@
 # Perform a permanent redirect when you query Nginx at '/redirect_me'
 
 package { 'nginx':
-      name     => 'nginx',
       ensure   => 'installed',
+      name     => 'nginx',
       provider => 'apt',
 }
 
@@ -24,9 +24,9 @@ file { '/var/www/html/index.nginx-debian.html':
 }
 
 file_line { 'rewrite redirect':
-       path   => '/etc/nginx/sites-available/default',
-       match  => "^\tserver_name _;",
-       line   => "\tserver_name _;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;",
+    path  => '/etc/nginx/sites-available/default',
+    match => "^\tserver_name _;",
+    line  => "\tserver_name _;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;",
 }
 
 exec { 'nginx restart':
