@@ -24,12 +24,11 @@ file_line { 'rewrite redirect':
     after   => 'server_name _;',
     line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
     require => Package['nginx'],
-    notify  => Service['nginx'],
 }
 
 file { '/var/www/html/index.nginx-debian.html':
   content => 'Holberton School',
-  require => file_line['addheader'],
+  require => Package['nginx'],
 }
 
 service { 'nginx':
