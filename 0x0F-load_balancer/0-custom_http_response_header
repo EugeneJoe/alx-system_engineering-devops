@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Installs Nginx and configures its HTTP response to contain a custom header
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+
+# get hostname
+host=$HOSTNAME
+
+# add header response
+new_str="\\\tadd_header X-Served-By $host;"
+sudo sed -i "36i $new_str" /etc/nginx/sites-available/default
+
+# restart nginx server
+sudo service nginx restart
