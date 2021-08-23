@@ -1,16 +1,19 @@
 # Install an Nginx server and add a custom header to its response headers
+exec { 'update':
+     command => '/usr/bin/apt-get update',
+}
 
 package { 'nginx':
-	ensure => 'present',
+	ensure  => 'installed',
+	require => Exec['update'],
 }
 
 file_line { 'add_header':
 	  ensure  => 'present',
-	  path    => '/etc/nginx/nginx.conf',
-	  after	  => "error_log /var/log/nginx/error.log;",
-	  line	  => "\tadd_header X-Served-By \"${hostname}\";",
+	  path    => '/etc/nginx/sites-available/default;',
+	  after	  => "root /var/www/html;",
+	  line	  => "add_header X-Served-By \$hostname};",
 	  require => Package['nginx'],
-	  notify  => Service['nginx'],
 }
 
 service { 'nginx':
