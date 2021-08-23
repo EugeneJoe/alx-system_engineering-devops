@@ -1,11 +1,12 @@
 # Install an Nginx server and add a custom header to its response headers
 
 exec { 'update':
-  command => '/usr/bin/apt-get update',
+  command => 'sudo apt-get update',
+  path	  => '/usr/bin:/usr/sbin:/bin',
 }
 
 package { 'nginx':
-  ensure  => 'installed',
+  ensure  => installed,
   require => Exec['update'],
 }
 
@@ -17,9 +18,9 @@ file_line { 'add_header':
   require => Package['nginx'],
 }
 
-file { '/var/www/html/index.html':
+file { '/var/www/html/index.nginx-debian.html':
   content => 'Holberton School',
-  require => Package['nginx'],
+  require => file_line['addheader'],
 }
 
 service { 'nginx':
