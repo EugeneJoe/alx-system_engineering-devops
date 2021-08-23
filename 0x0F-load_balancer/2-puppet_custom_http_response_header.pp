@@ -22,15 +22,15 @@ file_line { 'rewrite redirect':
     path    => '/etc/nginx/sites-available/default',
     after   => 'server_name _;',
     line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
-    require => Package['nginx'],
+    require => file_line['add_header'],
 }
 
 file { '/var/www/html/index.nginx-debian.html':
   content => 'Holberton School',
-  require => Package['nginx'],
+  require => file_line['rewrite redirerct'],
 }
 
 service { 'nginx':
   ensure  => 'running',
-  require => file_line['add_header'],
+  require => File['/var/www/html/index.nginx-debian.html'],
 }
