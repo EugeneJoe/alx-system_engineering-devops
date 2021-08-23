@@ -16,6 +16,11 @@ file_line { 'add_header':
 	  require => Package['nginx'],
 }
 
+file { '/var/www/html/index.html':
+  content => 'Holberton School',
+  require => Package['nginx'],
+}
+
 service { 'nginx':
 	ensure	=> 'running',
 	require	=> 'file_line['add_header'],
