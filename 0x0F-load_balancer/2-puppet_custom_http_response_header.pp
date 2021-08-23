@@ -1,8 +1,7 @@
 # Install an Nginx server and add a custom header to its response headers
 
 exec { 'update':
-  command => 'sudo apt-get update',
-  path	  => '/usr/bin:/usr/sbin:/bin',
+  command => '/usr/bin/apt-get update',
 }
 
 package { 'nginx':
