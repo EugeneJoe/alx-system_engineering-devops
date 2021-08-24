@@ -1,36 +1,32 @@
-# Install an Nginx server and add a custom header to its response headers
+# Automate Create a server and Add a custom HTTP header with Puppet
 
-exec { 'update':
-  command => '/usr/bin/apt-get update',
+exec { 'Update':
+  path     => ['/usr/bin', '/sbin', '/bin', '/usr/sbin'],
+  command  => 'sudo apt-get update -y',
+  provider => 'shell',
+  returns  => [0,1],
 }
 
-package { 'nginx':
-  ensure  => installed,
-  require => Exec['update'],
+exec { 'Install_nginx':
+  require  => Exec['Update'],
+  path     => ['/usr/bin', '/sbin', '/bin', '/usr/sbin'],
+  command  => 'sudo apt-get install nginx -y',
+  provider => 'shell',
+  returns  => [0,1],
 }
 
-file_line { 'add_header':
-  ensure  => 'present',
-  path    => '/etc/nginx/sites-available/default;',
-  after   => 'listen 80 default_server;',
-  line    => 'add_header X-Served-By $hostname;',
-  require => Package['nginx'],
+exec { 'header':
+  require  => Exec['Install_nginx'],
+  path     => ['/usr/bin', '/sbin', '/usr/sbin'],
+  command  => 'sudo sed -i "s/http {/http {\n\tadd_header X-Served-By \$hostname;\n/" /etc/nginx/nginx.conf',
+  provider => 'shell',
+  returns  => [0,1],
 }
 
-file_line { 'redirect':
-  ensure  => 'present',
-  path    => '/etc/nginx/sites-available/default',
-  after   => 'listen 80 default_server;',
-  line    => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=dQw4w9WgXcQ permanent;',
-  require => Package['nginx'],
-}
-
-file { '/var/www/html/index.nginx-debian.html':
-  content => 'Holberton School',
-  require => Package['nginx'],
-}
-
-service { 'nginx':
-  ensure  => 'running',
-  require => Package['nginx'],
+exec { 'start_server':
+  require  => Exec['header'],
+  path     => ['/usr/bin', '/sbin', '/bin', '/usr/sbin'],
+  command  => 'sudo service nginx start',
+  provider => 'shell',
+  returns  => [0,1],
 }
