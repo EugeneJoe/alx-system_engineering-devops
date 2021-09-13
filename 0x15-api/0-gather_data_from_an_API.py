@@ -3,8 +3,8 @@
 Script that accepts an employee ID and returns information about
 their TODO list progress
 """
-import requests
 import json
+import requests
 from sys import argv
 
 if __name__ == "__main__":
