@@ -20,7 +20,8 @@ def count_words(subreddit, word_list, hot_list=[], after=None):
     after = json.loads(subdata.text).get('data').get('after')
     if data is None:
         if len(hot_list) == 0:
-            return None
+            print("")
+            return
         word_count = {}
         word_list = list(set([word.lower() for word in word_list]))
         for word in word_list:
@@ -35,13 +36,13 @@ def count_words(subreddit, word_list, hot_list=[], after=None):
         for i in sort_word_count:
             if i[1] > 0:
                 print("{}: {}".format(i[0], i[1]))
-        return
     else:
         for item in data:
             hot_list.append(item.get('data').get('title'))
     if after is None:
         if len(hot_list) == 0:
-            return None
+            print("")
+            return
         word_count = {}
         word_list = list(set([word.lower() for word in word_list]))
         for word in word_list:
@@ -56,6 +57,5 @@ def count_words(subreddit, word_list, hot_list=[], after=None):
         for i in sort_word_count:
             if i[1] > 0:
                 print("{}: {}".format(i[0], i[1]))
-        return
     else:
         return count_words(subreddit, word_list, hot_list, after)
