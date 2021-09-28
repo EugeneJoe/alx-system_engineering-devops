@@ -20,6 +20,5 @@ def top_ten(subreddit):
     if not data:
         print("None")
         return
-    print(data)
     for item in data[0:10]:
         print(item.get('data').get('title'))
