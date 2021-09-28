@@ -22,12 +22,13 @@ def count_words(subreddit, word_list, hot_list=[], after=None):
         if len(hot_list) == 0:
             return None
         word_count = {}
+        word_list = list(set([word.lower() for word in word_list]))
         for word in word_list:
             word_count[word] = 0
         for word in word_list:
             for title in hot_list:
                 for t in title.split():
-                    if word.lower() == t.lower():
+                    if word == t.lower():
                         word_count[word] = word_count[word] + 1
         sort_word_count = sorted(word_count.items(), key=lambda x: x[1],
                                  reverse=True)
@@ -42,6 +43,7 @@ def count_words(subreddit, word_list, hot_list=[], after=None):
         if len(hot_list) == 0:
             return None
         word_count = {}
+        word_list = list(set([word.lower() for word in word_list]))
         for word in word_list:
             word_count[word] = 0
         for word in word_list:
