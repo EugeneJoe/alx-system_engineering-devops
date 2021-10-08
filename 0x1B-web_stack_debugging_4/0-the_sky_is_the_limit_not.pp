@@ -42,5 +42,5 @@ exec { '/etc/nginx/nginx.conf_7':
 
 exec { 'nginx-restart':
   command => 'nginx restart',
-  path	  => '/etc/init.d/'
+  path    => '/etc/init.d/'
 }
