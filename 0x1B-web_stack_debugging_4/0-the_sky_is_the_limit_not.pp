@@ -39,3 +39,8 @@ exec { '/etc/nginx/nginx.conf_7':
   path    => ['usr/local/sbin:usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'],
   command => "sed -i '/error_log.*/a \\\topen_file_cache max=200000 inactive=20s;' /etc/nginx/nginx.conf",
 }
+
+exec { 'nginx-restart':
+  command => 'nginx restart',
+  path	  => '/etc/init.d/'
+}
