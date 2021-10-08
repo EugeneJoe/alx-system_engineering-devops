@@ -2,7 +2,7 @@
 
 exec { '/etc/nginx/nginx.conf_0':
   path    => ['usr/local/sbin:usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'],
-  command => "sed -i 's/worker_processes.*/worker_processes auto;/g' /etc/nginx/nginx.conf",
+  command => "sed -i 's/worker_processes.*/worker_processes 7;/g' /etc/nginx/nginx.conf",
 }
 
 exec { '/etc/nginx/nginx.conf_1':
